@@ -2,7 +2,14 @@
 
 python3 -m venv venv
 . venv/bin/activate
+
 pip install -r requirements.txt
+
+# There are some issues with version conflicts in the requirements and I found Flask fails to run without
+# upgrading the above. However doing this in the requirements meant more conflicts were identified
+
+pip install flask_wtf --upgrade
+pip install flask_login --upgrade
 
 chown -R ec2-user:nginx /var/www
 
