@@ -16,6 +16,6 @@ resource "aws_instance" "my_vm" {
 
 	user_data = file("../scripts/userdata.sh")
 	tags = {
-		Name = "flask-todo-app-tf-test-2"
+		Name = "flask-todo-app-tf-test-3"
 	}
 }

@@ -20,5 +20,6 @@ git config core.fileMode false
 aws s3 cp s3://tci-s3-demo-210325/flask-todo/.env .env
 
 chmod +x scripts/post_userdata.sh
+chmod +x scripts/db_setup.sh
 
 ./scripts/post_userdata.sh
