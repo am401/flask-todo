@@ -30,20 +30,17 @@ Most of the changes were done to the following:
 - [x] Updated `.env` file with the necessary variables
 
 # Improvements
-I'm currently working on creating a script to automatically setup the database. I was able to figure out most of the database commands to be run through a shell script, however this remains a todo task. The high level concept is:
+Improvements completed to the overall deployment process:
 
-```
-su postgres -c "pg_ctl init -D /var/lib/pgsql/data"
-systemctl start postgresql
-systemctl enable postgresql
-su postgres -c "psql -c \"CREATE USER flasktodo WITH PASSWORD '[password]'\""
-su postgres -c 'createdb -e --owner=flasktodo todos'
-export FLASK_APP=wsgi
-systemctl restart flasktodo
-systemctl restart nginx
-flask db upgrade
-```
+- [x] Added new variable `PSQL_PASSWORD` to the `.env` file
+- [x] Created a new script `db_setup.sh` that can be executed on initial login
+- [x] Setup the Terraform files for easier deployment
 
-I'm considering add the password for the above to the `.env` file as a `PSQL_PASSWORD` variable.
+The original Udemy course used manual steps to setup the db where the course creator argued that since this was intended to only be run once there is no need to automate it or script it out. I disagree, we can create a script that can be executed on login, even if it's only done once.
 
-Aside from the above, I will be configuring this to run with Terraform too so will be adding that in once the overall database setup and configuration is finalized.
+This required finding ways to convert the commands from user input to a non-interactive version that can be run through the script. As always, StackOverflow and similar resources proved extremely helpful. With Terraform configured, I am down to the following process:
+
+- Apply the terraform specifications
+- Wait for EC2 to initialize
+- SSH into the EC2
+- Run the `scripts/db_setup.sh` file
