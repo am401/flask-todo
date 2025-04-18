@@ -7,7 +7,7 @@ resource "aws_instance" "my_vm" {
 	instance_type = "t2.micro"
 	iam_instance_profile = data.aws_iam_instance_profile.ec2-s3-readonly-role.name
 	key_name = "prod-web-apps-keys"
-	security_groups = ["launch-wizard-5"]
+	security_groups = ["webserver-test"]
 	
 	metadata_options {
 		http_endpoint = "enabled"
